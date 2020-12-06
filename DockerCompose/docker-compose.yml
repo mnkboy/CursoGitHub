@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  postgres_same_net:    
+    image: postgres:12.4    
+    ports:
+      - "5432:5432"
+    networks:
+      - same_net
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+
+  pgadmin_same_net:    
+    image: dpage/pgadmin4    
+    ports:
+       - "80:80"
+    networks:
+       - same_net
+    volumes:
+       - /home/mnkboy/PostgresBackUp:/var/lib/pgadmin/storage
+    environment:
+       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+
+networks:
+  same_net:
